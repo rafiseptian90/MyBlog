@@ -9,16 +9,18 @@ app.use(express.static(__dirname + '/public'));
 /* MongoDB setup */
 
 // connect to mongoDB
-const dbURI = 'mongodb+srv://rafish:<rafish7075>@rshdev.ddkng.mongodb.net/<blogs>?retryWrites=true&w=majority'
+const dbURI = 'mongodb+srv://rafish:rafish7075@rshdev.ddkng.mongodb.net/blogs?retryWrites=true&w=majority'
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
+    .then((result) => {
+        // listen server
+        app.listen(3000)
+    })
+    .catch((err) => console.log(err))
 
 /* End MongoDB setup */
 
 // middleware
 app.use(morgan('dev'))
-
-// listen server
-app.listen(3000)
 
 // use EJS for template engine
 app.set('view engine', 'ejs');
