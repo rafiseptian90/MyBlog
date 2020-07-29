@@ -1,0 +1,15 @@
+/* css reset */
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box
+}
+
+/* Footer styles */
+
+footer{
+    position:absolute;
+    bottom: 1rem;
+    left:50%;
+    transform:translateX(-50%);
+}

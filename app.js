@@ -1,5 +1,21 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
+const mongoose = require('mongoose')
+
+// register public
+app.use(express.static(__dirname + '/public'));
+
+/* MongoDB setup */
+
+// connect to mongoDB
+const dbURI = 'mongodb+srv://rafish:<rafish7075>@rshdev.ddkng.mongodb.net/<blogs>?retryWrites=true&w=majority'
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
+
+/* End MongoDB setup */
+
+// middleware
+app.use(morgan('dev'))
 
 // listen server
 app.listen(3000)
@@ -37,7 +53,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/blog/create', (req, res) => {
-    res.render('create', { title: 'create blog' })
+    res.render('create', { title: 'Create New Content' })
 })
 
 app.get('/about', (req, res) => {
@@ -55,6 +71,3 @@ app.use((req, res) => {
     // res.status(404).sendFile('./views/404.html', { root: __dirname })
     res.status(404).render('404', { title: '404' })
 })
-
-// register styles
-app.use(express.static('assets'))
